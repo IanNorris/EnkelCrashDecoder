@@ -16,7 +16,7 @@ export class LayoutManager {
                     type: 'column',
                     content: [{
                         type: 'component',
-                        componentName: 'camera',
+                        componentName: 'testComponent',
                         componentState: { label: 'B' }
                     }, {
                         type: 'component',
@@ -40,7 +40,7 @@ export class LayoutManager {
 
         var gl = new GoldenLayout(config);
 
-        gl.registerComponent('camera', buildComponent);
+        //gl.registerComponent('camera', buildComponent);
 
         gl.registerComponent('testComponent', function (container, componentState) {
             

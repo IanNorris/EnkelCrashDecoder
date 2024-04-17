@@ -1,0 +1,28 @@
+﻿@page "/Session/{sessionId}"
+@rendermode InteractiveServer
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _layoutModule = await JS.InvokeAsync<IJSObjectReference>("import", "./layout.js");
+            await _layoutModule.InvokeVoidAsync("LayoutManager.init");
+        }
+    }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        if (_layoutModule != null)
+        {
+            await _layoutModule.DisposeAsync();
+        }
+    }
+
+    [Parameter]
+    public string sessionId { get; set; }
+
+    private IJSObjectReference _layoutModule;
+}

@@ -1,28 +1,47 @@
-html, body {
+html, body
+{
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #222222;
+    height: 100%;
 }
 
-a, .btn-link {
-    color: #006bb7;
+.form-signin
+{
+    max-width: 330px;
+    padding: 1rem;
 }
 
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+.form-signin .form-floating:focus-within
+{
+    z-index: 2;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.form-signin h1
+{
+    color: white;
 }
 
-.content {
-    padding-top: 1.1rem;
+#blazor-error-ui
+{
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
-h1:focus {
-    outline: none;
-}
+    #blazor-error-ui .dismiss
+    {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
@@ -42,10 +61,6 @@ h1:focus {
     color: white;
 }
 
-    .blazor-error-boundary::after {
-        content: "An error has occurred."
-    }
-
-.darker-border-checkbox.form-check-input {
-    border-color: #929292;
+.blazor-error-boundary::after {
+    content: "An error has occurred."
 }
