@@ -2,11 +2,13 @@
 
 export class QrScannerCamera {
 
-    static init(backend) {
+    static init(backend, instanceGuid) {
         var backendObject = backend;
         var video = document.getElementById('qr-video');
 
-        const scanner = new QrScanner(video, result => { backendObject.invokeMethodAsync( 'OnScan', result.data); }, {
+        const scanner = new QrScanner(video, result => {
+                backendObject.invokeMethodAsync('OnScan', result.data);
+            }, {
             onDecodeError: error => {
                 backendObject.invokeMethodAsync('OnError',error.data);
             },
@@ -31,8 +33,9 @@ export class QrScannerCamera {
             start: function(){
                 scanner.start();
             },
-            stop: function () {
+            stop: function (uid) {
                 scanner.stop();
+                window.componentInstances[uid].close();
             }
         };
     }

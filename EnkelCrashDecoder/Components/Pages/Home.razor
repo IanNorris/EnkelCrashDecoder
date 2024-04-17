@@ -3,93 +3,23 @@
 @implements IAsyncDisposable
 @inject IJSRuntime JS
 
-<div id="video-container">
-    <video id="qr-video" @ref="_video" style="@(!_hasData ? "visibility: visible" : "visibility: hidden")"></video>
-</div>
-
-<button @onclick="StartScanning">New scan</button>
-
-<div>
-    <div>@_rawLog</div>
-</div>
-
 @code {
-
-    [JSInvokable]
-    public async void OnScan(string result)
-    {
-        if (!string.IsNullOrEmpty(result))
-        {
-            var compressedBytes = Base45Decoder.Decode(result);
-            var stringResult = ZlibDecompression.DeflateByteArrayToString(compressedBytes);
-
-            _rawLog = stringResult;
-            _hasData = true;
-
-            await StopScanning();
-
-            StateHasChanged();
-        }
-    }
-
-    [JSInvokable]
-    public void OnError(string result)
-    {
-        Console.WriteLine("Test");
-    }
-
-    protected override void OnInitialized()
-    {
-        _objRef = DotNetObjectReference.Create(this);
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            _qrScanner = await JS.InvokeAsync<IJSObjectReference>(
-                "import", "./camera.js");
-
-            _qrScanner = await _qrScanner.InvokeAsync<IJSObjectReference>("QrScannerCamera.init", new object[] { _objRef });
+            _layoutModule = await JS.InvokeAsync<IJSObjectReference>("import", "./layout.js");
+            await _layoutModule.InvokeVoidAsync("LayoutManager.init");
         }
     }
 
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
-        if (_qrScannerModule != null)
+        if (_layoutModule != null)
         {
-            await _qrScannerModule.DisposeAsync();
-        }
-
-        if (_qrScanner != null)
-        {
-            await _qrScanner.DisposeAsync();
-        }
-
-        _objRef?.Dispose();
-    }
-
-    async Task StartScanning()
-    {
-        if (_qrScanner != null)
-        {
-            await _qrScanner.InvokeVoidAsync("start");
+            await _layoutModule.DisposeAsync();
         }
     }
 
-    async Task StopScanning()
-    {
-        if (_qrScanner != null)
-        {
-            await _qrScanner.InvokeVoidAsync("stop");
-        }
-    }
-
-    private DotNetObjectReference<Home> _objRef;
-    private ElementReference _video;
-    private IJSObjectReference? _qrScannerModule;
-    private IJSObjectReference? _qrScanner;
-
-    private string _rawLog;
-    private bool _hasData;
+    private IJSObjectReference? _layoutModule;
 }

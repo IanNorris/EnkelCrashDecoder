@@ -1,0 +1,90 @@
+﻿@rendermode InteractiveServer
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<div id="video-container" style="width:100%; height: 100%">
+    <video id="qr-video" @ref="_video" style="width:100%; height: 100%"></video>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        _objRef = DotNetObjectReference.Create(this);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _qrScannerModule = await JS.InvokeAsync<IJSObjectReference>("import", "./camera.js");
+            _qrScanner = await _qrScannerModule.InvokeAsync<IJSObjectReference>("QrScannerCamera.init", new object[] { _objRef });
+        }
+    }
+
+    [JSInvokable]
+    public async void OnScan(string result)
+    {
+        if (!string.IsNullOrEmpty(result))
+        {
+            var compressedBytes = Base45Decoder.Decode(result);
+            var stringResult = ZlibDecompression.DeflateByteArrayToString(compressedBytes);
+
+            await StopScanning();
+
+            StateHasChanged();
+        }
+    }
+
+    [JSInvokable]
+    public void OnError(string result)
+    {
+        Console.WriteLine("Test");
+    }
+
+    async Task StartScanning()
+    {
+        if (_qrScanner != null)
+        {
+            await _qrScanner.InvokeVoidAsync("start");
+        }
+    }
+
+    async Task StopScanning()
+    {
+        if (_qrScanner != null)
+        {
+            await _qrScanner.InvokeVoidAsync("stop", new object[]{ uid } );
+            await _qrScanner.DisposeAsync();
+            _qrScanner = null;
+        }
+    }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        if (_qrScannerModule != null)
+        {
+            await _qrScannerModule.DisposeAsync();
+        }
+
+        if (_qrScanner != null)
+        {
+            await _qrScanner.DisposeAsync();
+        }
+
+        _objRef?.Dispose();
+    }
+
+    [Parameter]
+    public string uid { get; set; }
+
+    [Parameter]
+    public string label { get; set; }
+
+    [Parameter]
+    public string componentName { get; set; }
+
+    private ElementReference _video;
+    private DotNetObjectReference<Camera>? _objRef;
+    private IJSObjectReference? _qrScannerModule;
+    private IJSObjectReference? _qrScanner;
+}

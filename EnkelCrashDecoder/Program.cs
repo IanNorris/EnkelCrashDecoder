@@ -1,5 +1,6 @@
-using EnkelCrashDecoder.Client.Pages;
 using EnkelCrashDecoder.Components;
+using EnkelCrashDecoder.Components.Layout;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace EnkelCrashDecoder
 {
@@ -13,6 +14,11 @@ namespace EnkelCrashDecoder
 			builder.Services.AddRazorComponents()
 				.AddInteractiveServerComponents()
 				.AddInteractiveWebAssemblyComponents();
+
+			builder.Services.AddServerSideBlazor(options =>
+			{
+				options.RootComponents.RegisterForJavaScript<Camera>("camera");
+			});
 
 			var app = builder.Build();
 
