@@ -4,6 +4,19 @@
 @inject IJSRuntime JS
 @inject SessionService SS
 
+<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow w-100">
+    <a class="navbar-brand">
+        <img src="/LogoEditable.svg" alt="Enkel Logo" width="30" height="24" class="d-inline-block align-text-top">
+        Enkel Debugger
+    </a>
+
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    </ul>
+    <span class="session-id">@sessionId</span>
+</header>
+<div class="dock-content w-100" id="layout-root">
+</div>
+
 @code {
     protected override void OnInitialized()
     {

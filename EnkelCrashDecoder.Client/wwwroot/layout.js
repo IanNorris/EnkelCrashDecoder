@@ -33,7 +33,7 @@ export class LayoutManager {
             });
         };
 
-        var gl = new GoldenLayout(config);
+        var gl = new GoldenLayout(config, '#layout-root');
 
         gl.registerComponent('textComponent', buildComponent);
 

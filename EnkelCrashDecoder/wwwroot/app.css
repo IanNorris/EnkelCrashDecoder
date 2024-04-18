@@ -21,6 +21,40 @@ html, body
     color: white;
 }
 
+.session-id
+{
+    color: #95DC55;
+    font-size: larger;
+    margin-right: 0.5em;
+}
+
+.dock-container
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: normal;
+    align-items: normal;
+    align-content: normal;
+}
+
+.dock-container header
+{
+}
+
+.dock-container .dock-content
+{
+    flex-grow: 1;
+}
+
+a.navbar-brand:hover
+{
+    text-decoration: none;
+    background-color: transparent !important;
+}
+
+/***************************************************************************/
+
 #blazor-error-ui
 {
     background: lightyellow;
@@ -34,13 +68,13 @@ html, body
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss
-    {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
+#blazor-error-ui .dismiss
+{
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
 
 
 .valid.modified:not([type=checkbox]) {
