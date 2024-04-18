@@ -1,0 +1,21 @@
+﻿@rendermode InteractiveServer
+@inject SessionService SS
+
+<p>
+    @_sessionData
+</p>
+
+@code {
+    protected override void OnInitialized()
+    {
+        _sessionData = SS.GetScan(sessionId);
+    }
+
+    [Parameter]
+    public string sessionId { get; set; }
+
+    [Parameter]
+    public string componentName { get; set; }
+
+    public string _sessionData { get; set; }
+}

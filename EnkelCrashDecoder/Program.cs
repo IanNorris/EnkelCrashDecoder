@@ -19,7 +19,7 @@ namespace EnkelCrashDecoder
 
 			builder.Services.AddServerSideBlazor(options =>
 			{
-				options.RootComponents.RegisterForJavaScript<CamComponent>("camera");
+				options.RootComponents.RegisterForJavaScript<TextComponent>("textComponent");
 			});
 
 			var app = builder.Build();

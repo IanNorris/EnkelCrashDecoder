@@ -1,50 +1,41 @@
 
 export class LayoutManager {
 
-    static init() {
-
-        window.componentInstances = {};
+    static init(sessionId) {
 
         var config = {
             content: [{
                 type: 'row',
                 content: [{
                     type: 'component',
-                    componentName: 'testComponent',
-                    componentState: { label: 'A' }
+                    componentName: 'textComponent',
+                    componentState: { sessionId: sessionId }
                 }, {
                     type: 'column',
                     content: [{
                         type: 'component',
-                        componentName: 'testComponent',
-                        componentState: { label: 'B' }
+                        componentName: 'textComponent',
+                        componentState: { sessionId: sessionId }
                     }, {
                         type: 'component',
-                        componentName: 'testComponent',
-                        componentState: { label: 'C' }
+                        componentName: 'textComponent',
+                        componentState: { sessionId: sessionId }
                     }]
                 }]
             }]
         };
 
         var buildComponent = function (container, componentState) {
-            let uid = crypto.randomUUID();
-            componentState.uid = uid;
             var futureObject = Blazor.rootComponents.add(container._contentElement[0], componentState.componentName, componentState);
             
             futureObject.then(component => {
                 componentState.component = component;
-                window.componentInstances[uid] = container;
             });
         };
 
         var gl = new GoldenLayout(config);
 
-        //gl.registerComponent('camera', buildComponent);
-
-        gl.registerComponent('testComponent', function (container, componentState) {
-            
-        });
+        gl.registerComponent('textComponent', buildComponent);
 
         window.gl = gl;
 

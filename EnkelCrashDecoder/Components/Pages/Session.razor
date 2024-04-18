@@ -15,7 +15,7 @@
         if (firstRender)
         {
             _layoutModule = await JS.InvokeAsync<IJSObjectReference>("import", "./layout.js");
-            await _layoutModule.InvokeVoidAsync("LayoutManager.init");
+            await _layoutModule.InvokeVoidAsync("LayoutManager.init", new object[] { sessionId });
         }
     }
 
