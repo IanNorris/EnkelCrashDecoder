@@ -6,11 +6,23 @@
         {
             lock (_sessions)
             {
-                _sessions[sessionId] = sessionPayload;
+                if (_sessions.TryGetValue(sessionId, out var existingSession))
+                {
+                    existingSession.Data = sessionPayload;
+
+                    existingSession.SendStateUpdated();
+                }
+                else
+                {
+                    _sessions[sessionId] = new SessionState
+                    {
+                        Data = sessionPayload
+                    };
+                }
             }
         }
 
-        public string GetScan(string sessionId)
+        public SessionState GetScan(string sessionId)
         {
             lock (_sessions)
             {
@@ -18,6 +30,6 @@
             }
         }
 
-        private Dictionary<string, string> _sessions { get; set; } = new Dictionary<string, string>();
+        private Dictionary<string, SessionState> _sessions { get; set; } = new Dictionary<string, SessionState>();
     }
 }

@@ -53,6 +53,21 @@ a.navbar-brand:hover
     background-color: transparent !important;
 }
 
+.lm_content pre
+{
+    color: white;
+}
+
+.lm_content p
+{
+    color: white;
+}
+
+.lm_content
+{
+    overflow: scroll;
+}
+
 /***************************************************************************/
 
 #blazor-error-ui

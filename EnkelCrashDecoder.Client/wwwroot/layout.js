@@ -40,5 +40,10 @@ export class LayoutManager {
         window.gl = gl;
 
         gl.init();
+
+        $(window).resize(function () {
+            let area = $('#layout-root');
+            gl.updateSize(area.width(), area.height());
+        });
     }
 }

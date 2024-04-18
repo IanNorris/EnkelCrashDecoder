@@ -1,14 +1,15 @@
 ﻿@rendermode InteractiveServer
 @inject SessionService SS
 
-<p>
-    @_sessionData
-</p>
+<pre>
+    @_sessionData.Data
+</pre>
 
 @code {
     protected override void OnInitialized()
     {
         _sessionData = SS.GetScan(sessionId);
+        _sessionData.OnStateUpdated += () => InvokeAsync( () => StateHasChanged() );
     }
 
     [Parameter]
@@ -17,5 +18,5 @@
     [Parameter]
     public string componentName { get; set; }
 
-    public string _sessionData { get; set; }
+    public SessionState _sessionData { get; set; }
 }

@@ -17,6 +17,11 @@
 </main>
 
 @code {
+    protected override void OnInitialized()
+    {
+        _sessionId = Encoding.UTF8.GetString(Guid.NewGuid().ToByteArray().Select(x => (byte)CodeAlphabet[x % CodeAlphabet.Length]).Take(CodeLength).ToArray());
+    }
+
     public void StartScan()
     {
         NavMan.NavigateTo($"/Scan/{_sessionId}");
@@ -30,5 +35,5 @@
     private const int CodeLength = 5;
     private const string CodeAlphabet = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
 
-    private string _sessionId = Encoding.UTF8.GetString(Guid.NewGuid().ToByteArray().Select(x => (byte)CodeAlphabet[x % CodeAlphabet.Length]).Take(CodeLength).ToArray());
+    private string _sessionId;
 }
