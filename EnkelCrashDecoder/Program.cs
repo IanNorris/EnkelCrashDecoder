@@ -15,6 +15,8 @@ namespace EnkelCrashDecoder
 				.AddInteractiveServerComponents()
 				.AddInteractiveWebAssemblyComponents();
 
+			builder.Services.AddSingleton<SessionService>();
+
 			builder.Services.AddServerSideBlazor(options =>
 			{
 				options.RootComponents.RegisterForJavaScript<CamComponent>("camera");

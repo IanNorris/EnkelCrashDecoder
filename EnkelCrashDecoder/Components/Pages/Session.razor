@@ -2,8 +2,14 @@
 @rendermode InteractiveServer
 @implements IAsyncDisposable
 @inject IJSRuntime JS
+@inject SessionService SS
 
 @code {
+    protected override void OnInitialized()
+    {
+        _sessionData = SS.GetScan(sessionId);
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -23,6 +29,8 @@
 
     [Parameter]
     public string sessionId { get; set; }
+
+    public string _sessionData { get; set; }
 
     private IJSObjectReference _layoutModule;
 }
