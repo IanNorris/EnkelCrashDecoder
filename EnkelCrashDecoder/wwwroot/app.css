@@ -47,6 +47,11 @@ html, body
     flex-grow: 1;
 }
 
+a.navbar-brand
+{
+    color: #95DC55;
+}
+
 a.navbar-brand:hover
 {
     text-decoration: none;
