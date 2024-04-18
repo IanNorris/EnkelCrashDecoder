@@ -35,7 +35,6 @@ export class QrScannerCamera {
             },
             stop: function (uid) {
                 scanner.stop();
-                window.componentInstances[uid].close();
             }
         };
     }

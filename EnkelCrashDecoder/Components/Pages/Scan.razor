@@ -25,12 +25,14 @@
     }
 
     [JSInvokable]
-    public void OnScan(string result)
+    public async Task OnScan(string result)
     {
         if (!string.IsNullOrEmpty(result))
         {
             var compressedBytes = Base45Decoder.Decode(result);
             var stringResult = ZlibDecompression.DeflateByteArrayToString(compressedBytes);
+
+            await _qrScanner.InvokeVoidAsync("stop");
 
             SS.InsertScan(sessionId, stringResult);
 
