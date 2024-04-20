@@ -49,7 +49,7 @@ namespace EnkelCrashDecoder.Data.V0
         public UInt16 GS; //0xF2
 
         public UInt16 EnkelStateBits; //0xF4
-        byte ISR0; //ISR stack //0xF6,0xF7
-        byte ISR1;
+        public byte ISR0; //ISR stack //0xF6,0xF7
+        public byte ISR1;
     }
 }
