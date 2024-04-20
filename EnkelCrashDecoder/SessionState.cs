@@ -1,4 +1,6 @@
-﻿namespace EnkelCrashDecoder
+﻿using EnkelCrashDecoder.Data;
+
+namespace EnkelCrashDecoder
 {
     public class SessionState
     {
@@ -6,7 +8,7 @@
 
         public event OnStateUpdatedDelegate OnStateUpdated;
 
-        public string Data { get; set; }
+        public QRContent Data { get; set; }
 
         public void SendStateUpdated()
         {

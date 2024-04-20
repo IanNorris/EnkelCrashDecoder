@@ -8,17 +8,17 @@ export class LayoutManager {
                 type: 'row',
                 content: [{
                     type: 'component',
-                    componentName: 'textComponent',
+                    componentName: 'text',
                     componentState: { sessionId: sessionId }
                 }, {
                     type: 'column',
                     content: [{
                         type: 'component',
-                        componentName: 'textComponent',
+                        componentName: 'regs',
                         componentState: { sessionId: sessionId }
                     }, {
                         type: 'component',
-                        componentName: 'textComponent',
+                        componentName: 'text',
                         componentState: { sessionId: sessionId }
                     }]
                 }]
@@ -35,7 +35,8 @@ export class LayoutManager {
 
         var gl = new GoldenLayout(config, '#layout-root');
 
-        gl.registerComponent('textComponent', buildComponent);
+        gl.registerComponent('regs', buildComponent);
+        gl.registerComponent('text', buildComponent);
 
         window.gl = gl;
 

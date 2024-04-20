@@ -28,4 +28,26 @@ public class ZlibDecompression
             return Encoding.UTF8.GetString(decompressedBytes);
         }
     }
+
+    public static byte[] DeflateBytes(byte[] compressedBytes)
+    {
+        // Create a memory stream with the compressed bytes
+        using var compressedStream = new MemoryStream(compressedBytes);
+
+        var header = new byte[2];
+        compressedStream.Read(header);
+
+        // Create a deflate stream to decompress the data
+        using (var deflateStream = new DeflateStream(compressedStream, CompressionMode.Decompress))
+        // Create a memory stream for the decompressed data
+        using (var decompressedStream = new MemoryStream())
+        {
+
+
+            // Copy the decompressed data to the decompressedStream
+            deflateStream.CopyTo(decompressedStream);
+
+            return decompressedStream.ToArray();
+        }
+    }
 }

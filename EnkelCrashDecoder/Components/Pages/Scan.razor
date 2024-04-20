@@ -25,25 +25,30 @@
     }
 
     [JSInvokable]
-    public async Task OnScan(string result)
+    public async Task OnScan(string qrString)
     {
-        if (!string.IsNullOrEmpty(result))
+        if (!string.IsNullOrEmpty(qrString))
         {
-            var compressedBytes = Base45Decoder.Decode(result);
-            var stringResult = ZlibDecompression.DeflateByteArrayToString(compressedBytes);
+            var qrContent = QRDecoder.GetContent(qrString);
 
-            await _qrScanner.InvokeVoidAsync("stop");
+            if(qrContent != null)
+            {
+                await _qrScanner.InvokeVoidAsync("stop");
 
-            SS.InsertScan(sessionId, stringResult);
+                SS.InsertScan(sessionId, qrContent);
 
-            NavMan.NavigateTo($"/Session/{sessionId}");
+                NavMan.NavigateTo($"/Session/{sessionId}");
+            }
         }
     }
 
     [JSInvokable]
     public void OnError(string result)
     {
-        Console.WriteLine(result);
+        if (result != null)
+        {
+            Console.WriteLine(result);
+        }
     }
 
     async Task StartScanning()

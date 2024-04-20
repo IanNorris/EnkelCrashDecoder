@@ -1,0 +1,90 @@
+﻿@using EnkelCrashDecoder.Data.V0
+@rendermode InteractiveServer
+@inject SessionService SS
+
+@if (_regData != null)
+{
+    <table style="width:100%">
+        <tr>
+            <td><pre>RAX = @GetRegisterValue64("RAX")</pre></td>
+            <td><pre>RBX = @GetRegisterValue64("RBX")</pre></td>
+            <td><pre>RCX = @GetRegisterValue64("RCX")</pre></td>
+            <td><pre>RDX = @GetRegisterValue64("RDX")</pre></td>
+        </tr>
+    </table>
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        UpdateData();
+        _sessionData.OnStateUpdated += () => InvokeAsync(() => UpdateData());
+    }
+
+    protected void UpdateData()
+    {
+        _sessionData = SS.GetScan(sessionId);
+
+        foreach(var segment in _sessionData.Data.Segments)
+        {
+            if(segment.GetType() == typeof(QRPanicCPURegs))
+            {
+                _regData = segment;
+            }
+        }
+
+        StateHasChanged();
+    }
+
+    public T GetRegisterValue<T>(string name)
+    {
+        if (_regData != null)
+        {
+            var prop = _regData.GetType().GetField(name);
+
+            if (prop != null)
+            {
+                return (T)_regData.GetType().GetField(name).GetValue(_regData);
+            }
+            else
+            {
+                throw new InvalidDataException($"Unknown register {name}");
+            }
+        }
+        else
+        {
+            return default(T);
+        }
+    }
+
+    public UInt64 GetRegisterValue64(string name)
+    {
+        return GetRegisterValue<UInt64>(name);
+    }
+
+    public UInt32 GetRegisterValue32(string name)
+    {
+        return GetRegisterValue<UInt32>(name);
+    }
+
+    public UInt16 GetRegisterValue16(string name)
+    {
+        return GetRegisterValue<UInt16>(name);
+    }
+
+    public byte GetRegisterValue8(string name)
+    {
+        return GetRegisterValue<byte>(name);
+    }
+
+    [Parameter]
+    public string sessionId { get; set; }
+
+    [Parameter]
+    public string componentName { get; set; }
+
+    public SessionState _sessionData { get; set; }
+
+    public object _regData { get; set; }
+}

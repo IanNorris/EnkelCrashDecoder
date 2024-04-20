@@ -1,14 +1,16 @@
-﻿namespace EnkelCrashDecoder
+﻿using EnkelCrashDecoder.Data;
+
+namespace EnkelCrashDecoder
 {
     public class SessionService
     {
-        public void InsertScan(string sessionId, string sessionPayload)
+        public void InsertScan(string sessionId, QRContent content)
         {
             lock (_sessions)
             {
                 if (_sessions.TryGetValue(sessionId, out var existingSession))
                 {
-                    existingSession.Data = sessionPayload;
+                    existingSession.Data = content;
 
                     existingSession.SendStateUpdated();
                 }
@@ -16,7 +18,7 @@
                 {
                     _sessions[sessionId] = new SessionState
                     {
-                        Data = sessionPayload
+                        Data = content
                     };
                 }
             }
