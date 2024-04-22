@@ -11,4 +11,16 @@ namespace EnkelCrashDecoder.Data
         public byte PageCount;
         public UInt32 Pad;
     }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public class QRPanicPacketHeader
+    {
+        public UInt32 Type;
+        public UInt32 Size;
+    }
+
+    public enum QRPacketType : UInt32
+    {
+        CPURegs = 0xA3000001,
+    }
 }

@@ -4,16 +4,23 @@
     {
         public static QRContent GetContentFromBytes(QRPanicHeader header, IntPtr data)
         {
-            data = QRDecoder.GetStruct<QRPanicCPURegs>(data, out var regs);
+            data = QRDecoder.GetStruct<QRPanicPacketHeader>(data, out var packetHeader);
 
-            return new QRContent
+            var segmentList = new List<object>();
+
+            var output = new QRContent
             {
                 Header = header,
-                Segments = new List<object>
-                {
-                    regs,
-                }
+                Segments = segmentList
             };
+
+            if (packetHeader.Type == (UInt32)QRPacketType.CPURegs)
+            {
+                data = QRDecoder.GetStruct<QRPanicCPURegs>(data, out var regs);
+                segmentList.Add(regs);
+            }
+
+            return output;
         }
     }
 }
