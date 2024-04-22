@@ -4,68 +4,56 @@
 
 @if (_regData != null)
 {
-    <table style="width:100%">
-        <tr>
-            <td><pre>RAX = @GetRegisterValue64("RAX")</pre></td>
-            <td><pre>RBX = @GetRegisterValue64("RBX")</pre></td>
-            <td><pre>RCX = @GetRegisterValue64("RCX")</pre></td>
-            <td><pre>RDX = @GetRegisterValue64("RDX")</pre></td>
-            <td><pre>RSI = @GetRegisterValue64("RSI")</pre></td>
-            <td><pre>RDI = @GetRegisterValue64("RDI")</pre></td>
-            <td><pre> R8 = @GetRegisterValue64("R8")</pre></td>
-        </tr>
+    <div class="reg-table">
+            <span class="reg-value">RAX = @GetRegisterValue64("RAX")</span>
+            <span class="reg-value">RBX = @GetRegisterValue64("RBX")</span>
+            <span class="reg-value">RCX = @GetRegisterValue64("RCX")</span>
+            <span class="reg-value">RDX = @GetRegisterValue64("RDX")</span>
+            <span class="reg-value">RSI = @GetRegisterValue64("RSI")</span>
+            <span class="reg-value">RDI = @GetRegisterValue64("RDI")</span>
+            <span class="reg-value"> R8 = @GetRegisterValue64("R8")</span>
 
-        <tr>
-            <td><pre> R9 = @GetRegisterValue64("R9")</pre></td>
-            <td><pre>R10 = @GetRegisterValue64("R10")</pre></td>
-            <td><pre>R11 = @GetRegisterValue64("R11")</pre></td>
-            <td><pre>R12 = @GetRegisterValue64("R12")</pre></td>
-            <td><pre>R13 = @GetRegisterValue64("R13")</pre></td>
-            <td><pre>R14 = @GetRegisterValue64("R14")</pre></td>
-            <td><pre>R15 = @GetRegisterValue64("R15")</pre></td>
-        </tr>
+            <span class="reg-value"> R9 = @GetRegisterValue64("R9")</span>
+            <span class="reg-value">R10 = @GetRegisterValue64("R10")</span>
+            <span class="reg-value">R11 = @GetRegisterValue64("R11")</span>
+            <span class="reg-value">R12 = @GetRegisterValue64("R12")</span>
+            <span class="reg-value">R13 = @GetRegisterValue64("R13")</span>
+            <span class="reg-value">R14 = @GetRegisterValue64("R14")</span>
+            <span class="reg-value">R15 = @GetRegisterValue64("R15")</span>
 
-        <tr>
-            <td><pre>RFLAGS = @GetRegisterValue64("RFLAGS")</pre></td>
-            <td><pre>RIP = @GetRegisterValue64("RIP")</pre></td>
-            <td><pre>RSP = @GetRegisterValue64("RSP")</pre></td>
-            <td><pre>RBP = @GetRegisterValue64("RBP")</pre></td>
-            <td><pre>FSBase = @GetRegisterValue64("FSBase")</pre></td>
-            <td><pre>GSBase = @GetRegisterValue64("GSBase")</pre></td>
-            <td><pre>GSBaseOther = @GetRegisterValue64("GSBaseOther")</pre></td>
-        </tr>
+            <span class="reg-value">RFLAGS = @GetRegisterValue64("RFLAGS")</span>
+            <span class="reg-value">RIP = @GetRegisterValue64("RIP")</span>
+            <span class="reg-value">RSP = @GetRegisterValue64("RSP")</span>
+            <span class="reg-value">RBP = @GetRegisterValue64("RBP")</span>
+            <span class="reg-value">FSBase = @GetRegisterValue64("FSBase")</span>
+            <span class="reg-value">GSBase = @GetRegisterValue64("GSBase")</span>
+            <span class="reg-value">GSBaseOther = @GetRegisterValue64("GSBaseOther")</span>
 
-        <tr>
-            <td><pre>CR0 = @GetRegisterValue64("CR0")</pre></td>
-            <td><pre>CR2 = @GetRegisterValue64("CR2")</pre></td>
-            <td><pre>CR3 = @GetRegisterValue64("CR3")</pre></td>
-            <td><pre>CR4 = @GetRegisterValue64("CR4")</pre></td>
+            <span class="reg-value">CR0 = @GetRegisterValue64("CR0")</span>
+            <span class="reg-value">CR2 = @GetRegisterValue64("CR2")</span>
+            <span class="reg-value">CR3 = @GetRegisterValue64("CR3")</span>
+            <span class="reg-value">CR4 = @GetRegisterValue64("CR4")</span>
 
-            <td><pre>GDTR = @GetRegisterValue64("GDTR")</pre></td>
-            <td><pre>IDTR = @GetRegisterValue64("IDTR")</pre></td>
-            <td><pre>LDTR = @GetRegisterValue64("LDTR")</pre></td>
-        </tr>
+            <span class="reg-value">GDTR = @GetRegisterValue64("GDTR")</span>
+            <span class="reg-value">IDTR = @GetRegisterValue64("IDTR")</span>
+            <span class="reg-value">LDTR = @GetRegisterValue64("LDTR")</span>
 
-        <tr>
-            <td><pre>LDTR = @GetRegisterValue64("LDTR")</pre></td>
-            <td><pre>CS = @GetRegisterValue16("CS")</pre></td>
-            <td><pre>DS = @GetRegisterValue16("DS")</pre></td>
-            <td><pre>SS = @GetRegisterValue16("SS")</pre></td>
-            <td><pre>ES = @GetRegisterValue16("ES")</pre></td>
-            <td><pre>FS = @GetRegisterValue16("FS")</pre></td>
-            <td><pre>GS = @GetRegisterValue16("GS")</pre></td>
-        </tr>
+            <span class="reg-value">LDTR = @GetRegisterValue64("LDTR")</span>
+            <span class="reg-value">CS = @GetRegisterValue16("CS")</span>
+            <span class="reg-value">DS = @GetRegisterValue16("DS")</span>
+            <span class="reg-value">SS = @GetRegisterValue16("SS")</span>
+            <span class="reg-value">ES = @GetRegisterValue16("ES")</span>
+            <span class="reg-value">FS = @GetRegisterValue16("FS")</span>
+            <span class="reg-value">GS = @GetRegisterValue16("GS")</span>
 
-        <tr>
-            <td><pre>ESB = @GetRegisterValue16("EnkelStateBits")</pre></td>
-            <td><pre>ISR0 = @GetRegisterValue8("ISR0")</pre></td>
-            <td><pre>ISR1 = @GetRegisterValue8("ISR1")</pre></td>
-            <td><pre></pre></td>
-            <td><pre></pre></td>
-            <td><pre></pre></td>
-            <td><pre></pre></td>
-        </tr>
-    </table>
+            <span class="reg-value">ESB = @GetRegisterValue16("EnkelStateBits")</span>
+            <span class="reg-value">ISR0 = @GetRegisterValue8("ISR0")</span>
+            <span class="reg-value">ISR1 = @GetRegisterValue8("ISR1")</span>
+            <span class="reg-value"></span>
+            <span class="reg-value"></span>
+            <span class="reg-value"></span>
+            <span class="reg-value"></span>
+    </div>
 }
 
 @code {
@@ -91,6 +79,24 @@
         StateHasChanged();
     }
 
+    public MarkupString FormatString(UInt64 value, int byteWidth)
+    {
+        // Convert the integer to a hexadecimal string with padding
+        var hexValue = value.ToString("X");
+        var padding = "0x".PadRight(2 + (byteWidth * 2) - hexValue.Length, '0');
+
+        var classForValue = value == 0 ? "numeric-value-pad" : "numeric-value";
+        var classForDecimal = value == 0 ? "numeric-value-pad" : "numeric-value";
+
+        // Create the HTML string with spans for styling
+        string resultHtml = $"<span class='numeric-value-pad'>{padding}</span>" +
+                                $"<span class='{classForValue}'>{hexValue}</span>" +
+                                $" <span class='{classForDecimal}'>({value})</span>";
+
+        // Return as MarkupString
+        return new MarkupString(resultHtml);
+    }
+
     public T GetRegisterValue<T>(string name)
     {
         if (_regData != null)
@@ -112,24 +118,28 @@
         }
     }
 
-    public UInt64 GetRegisterValue64(string name)
+    public MarkupString GetRegisterValue64(string name)
     {
-        return GetRegisterValue<UInt64>(name);
+        var value = GetRegisterValue<UInt64>(name);
+        return FormatString(value, 8);
     }
 
-    public UInt32 GetRegisterValue32(string name)
+    public MarkupString GetRegisterValue32(string name)
     {
-        return GetRegisterValue<UInt32>(name);
+        var value = GetRegisterValue<UInt32>(name);
+        return FormatString(value, 4);
     }
 
-    public UInt16 GetRegisterValue16(string name)
+    public MarkupString GetRegisterValue16(string name)
     {
-        return GetRegisterValue<UInt16>(name);
+        var value = GetRegisterValue<UInt16>(name);
+        return FormatString(value, 2);
     }
 
-    public byte GetRegisterValue8(string name)
+    public MarkupString GetRegisterValue8(string name)
     {
-        return GetRegisterValue<byte>(name);
+        var value = GetRegisterValue<byte>(name);
+        return FormatString(value, 1);
     }
 
     [Parameter]

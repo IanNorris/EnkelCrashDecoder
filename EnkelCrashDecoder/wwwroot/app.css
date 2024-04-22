@@ -50,6 +50,30 @@ html, body
 a.navbar-brand
 {
     color: #95DC55;
+    margin-left: 0.5rem;
+}
+
+.numeric-value
+{
+    color: white;
+}
+
+.numeric-value-pad
+{
+    color: grey;
+}
+
+.reg-table
+{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.reg-value
+{
+    padding: 0.5rem;
+    color: white;
+    display: block;
 }
 
 a.navbar-brand:hover
