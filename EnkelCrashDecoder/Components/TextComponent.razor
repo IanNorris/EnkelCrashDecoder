@@ -2,14 +2,17 @@
 @inject SessionService SS
 
 <pre>
-    @_sessionData.Data
+    @_sessionData?.Data
 </pre>
 
 @code {
     protected override void OnInitialized()
     {
         _sessionData = SS.GetScan(sessionId);
-        _sessionData.OnStateUpdated += () => InvokeAsync( () => StateHasChanged() );
+        if (_sessionData != null)
+        {
+            _sessionData.OnStateUpdated += () => InvokeAsync( () => StateHasChanged() );
+        }
     }
 
     [Parameter]

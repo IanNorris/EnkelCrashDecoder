@@ -28,7 +28,12 @@ namespace EnkelCrashDecoder
         {
             lock (_sessions)
             {
-                return _sessions[sessionId];
+                if(_sessions.TryGetValue(sessionId,out var existingSession))
+                {
+                    return existingSession;
+                }
+
+                return null;
             }
         }
 

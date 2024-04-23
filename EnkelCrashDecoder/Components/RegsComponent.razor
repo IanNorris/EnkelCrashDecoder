@@ -61,19 +61,23 @@
     protected override void OnInitialized()
     {
         UpdateData();
-        _sessionData.OnStateUpdated += () => InvokeAsync(() => UpdateData());
     }
 
     protected void UpdateData()
     {
         _sessionData = SS.GetScan(sessionId);
 
-        foreach(var segment in _sessionData.Data.Segments)
+        if (_sessionData != null)
         {
-            if(segment.GetType() == typeof(QRPanicCPURegs))
+            foreach (var segment in _sessionData.Data.Segments)
             {
-                _regData = segment;
+                if (segment.GetType() == typeof(QRPanicCPURegs))
+                {
+                    _regData = segment;
+                }
             }
+
+            _sessionData.OnStateUpdated += () => InvokeAsync(() => UpdateData());
         }
 
         StateHasChanged();
