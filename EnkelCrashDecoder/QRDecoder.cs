@@ -17,6 +17,7 @@ namespace EnkelCrashDecoder
         {
             // Allocate unmanaged memory for the struct
             IntPtr bufferPtr = Marshal.AllocHGlobal((int)data.Length);
+            IntPtr originalPtr = bufferPtr;
 
             try
             {
@@ -37,7 +38,7 @@ namespace EnkelCrashDecoder
             finally
             {
                 // Free the unmanaged memory
-                Marshal.FreeHGlobal(bufferPtr);
+                Marshal.FreeHGlobal(originalPtr);
             }
         }
 

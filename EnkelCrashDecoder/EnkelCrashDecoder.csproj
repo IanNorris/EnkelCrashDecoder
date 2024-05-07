@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EnkelCrashDecoder.Client\EnkelCrashDecoder.Client.csproj" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.4" />
   </ItemGroup>
 
   <ItemGroup>
